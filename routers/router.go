@@ -14,17 +14,9 @@ import (
 )
 
 func init() {
-	ns := beego.NewNamespace("/v1",
-		beego.NSNamespace("/object",
-			beego.NSInclude(
-				&controllers.ObjectController{},
-			),
-		),
-		beego.NSNamespace("/user",
-			beego.NSInclude(
-				&controllers.UserController{},
-			),
-		),
-	)
-	beego.AddNamespace(ns)
+	beego.Router("/v1/students", &controllers.StudentController{}, "get:GetStudents")
+	beego.Router("/v1/student/:id", &controllers.StudentController{}, "get:GetStudent")
+	beego.Router("/v1/student", &controllers.StudentController{}, "post:CreateStudent")
+	beego.Router("/v1/student/:id", &controllers.StudentController{}, "put:UpdateStudent")
+	beego.Router("/v1/student/:id", &controllers.StudentController{}, "delete:DeleteStudent")
 }
