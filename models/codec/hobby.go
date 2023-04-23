@@ -1,6 +1,6 @@
 package codec
 
 type Hobby struct {
-	Id       string `json:"id"`
+	Id       int    `json:"id"`
 	NamaHobi string `json:"namaHobi"`
 }
