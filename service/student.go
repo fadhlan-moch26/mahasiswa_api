@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 	codec "mahasiswa/models/codec"
 	"mahasiswa/repository"
 )
@@ -26,4 +27,21 @@ func GetStudents(ctx context.Context) ([]*codec.Student, error) {
 		})
 	}
 	return v, nil
+}
+
+func GetStudent(ctx context.Context, id string) (*codec.Student, error) {
+	if id == "" {
+		return nil, errors.New("id is empty")
+	}
+	student, err := repository.GetStudent(ctx, id)
+	if err != nil {
+		return nil, errors.New("repository error")
+	}
+	return &codec.Student{
+		Id:                student.Id,
+		Nama:              student.Nama,
+		Usia:              student.Usia,
+		Gender:            student.Gender,
+		TanggalRegistrasi: student.TanggalRegistrasi,
+	}, nil
 }
