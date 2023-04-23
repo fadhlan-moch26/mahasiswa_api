@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	studentServices "mahasiswa/service"
+
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -17,20 +19,12 @@ func (c *StudentController) URLMapping() {
 }
 
 func (c *StudentController) GetStudents() {
-	// ctx := c.Ctx.Request.Context()
-	// w := c.Ctx.ResponseWriter
-	// id := c.Ctx.Input.Param(auditTrailIdPathParam)
-	// audit, err := auditServices.GetAuditTrail(ctx, id)
-	// if err != nil {
-	// 	log.Error(ctx, err, "Get Audit Fail")
-	// 	server.SetResponse(w, err)
-	// }
-	// server.SetResponse(w, response.Success)
-	// err = c.Ctx.JSONResp(&audit)
-	// if err != nil {
-	// 	log.Error(ctx, err, "Write json response body payload failed")
-	// 	server.SetResponse(w, err)
-	// }
+	ctx := c.Ctx.Request.Context()
+	students, err := studentServices.GetStudents(ctx)
+	if err != nil {
+		return
+	}
+	c.JSONResp(&students)
 }
 
 func (c *StudentController) GetStudent()    {}

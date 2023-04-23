@@ -1,4 +1,4 @@
-// package codec
+package codec
 
 // type StudentHobby struct {
 // 	IdMahasiswa string `json:"id"`
