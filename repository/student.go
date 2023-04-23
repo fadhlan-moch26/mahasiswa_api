@@ -45,12 +45,28 @@ func DeleteStudent(ctx context.Context, req codec.Student) (int, error) {
 	o := orm.NewOrm()
 	err := o.Read(&req)
 	if err != nil {
-		return 0, errors.New("There is no id match in database")
+		return 0, errors.New("there is no id match in database")
 	}
 	id, err := o.Delete(&req)
 	if err != nil {
 		// log.Println(ctx, err, "Error occured when try to delete model", id)
-		return 0, errors.New("Error occured when try to delete model")
+		return 0, errors.New("error occured when try to delete model")
+	}
+	fmt.Println(id, " Succesfully delete data")
+	return int(id), nil
+}
+
+func UpdateStudent(ctx context.Context, req codec.Student) (int, error) {
+	o := orm.NewOrm()
+	err := o.Read(&req)
+	if err != nil {
+		return 0, errors.New("there is no id match in database")
+	}
+	currentStudent := req
+	id, err := o.Update(&currentStudent)
+	if err != nil {
+		// log.Println(ctx, err, "Error occured when try to delete model", id)
+		return 0, errors.New("error occured when try to delete model")
 	}
 	fmt.Println(id, " Succesfully delete data")
 	return int(id), nil

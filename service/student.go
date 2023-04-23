@@ -54,3 +54,12 @@ func DeleteStudent(ctx context.Context, req *codec.Student) (int, error) {
 	req.Id = id
 	return req.Id, nil
 }
+
+func UpdateStudent(ctx context.Context, req *codec.Student) (int, error) {
+	id, err := repository.UpdateStudent(ctx, *req)
+	if err != nil {
+		return 0, err
+	}
+	req.Id = id
+	return req.Id, nil
+}

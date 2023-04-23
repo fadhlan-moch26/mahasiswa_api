@@ -24,6 +24,7 @@ func (c *StudentController) GetStudents() {
 	ctx := c.Ctx.Request.Context()
 	students, err := studentServices.GetStudents(ctx)
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 	c.JSONResp(&students)
@@ -42,12 +43,28 @@ func (c *StudentController) GetStudent() {
 	// server.SetResponse(w, response.Success)
 	err = c.Ctx.JSONResp(&student)
 	if err != nil {
-		// log.Error(ctx, err, "Write json response body payload failed")
-		// server.SetResponse(w, err)
+		fmt.Println(err)
+		return
 	}
 }
 func (c *StudentController) CreateStudent() {}
-func (c *StudentController) UpdateStudent() {}
+
+func (c *StudentController) UpdateStudent() {
+	ctx := c.Ctx.Request.Context()
+	w := c.Ctx.ResponseWriter
+	req := codec.Student{}
+	err := c.BindJSON(&req)
+	if err != nil {
+		fmt.Print(w)
+		return
+	}
+	id, err := studentServices.UpdateStudent(ctx, &req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	c.Ctx.JSONResp(id)
+}
 
 func (c *StudentController) DeleteStudent() {
 	ctx := c.Ctx.Request.Context()
@@ -60,8 +77,7 @@ func (c *StudentController) DeleteStudent() {
 	}
 	id, err := studentServices.DeleteStudent(ctx, &req)
 	if err != nil {
-		// log.Error(ctx, err, "Delete Audit Fail")
-		// server.SetResponse(w, err)
+		fmt.Println(err)
 		return
 	}
 	// 	server.SetResponse(w, response.Success)
