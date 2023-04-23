@@ -81,3 +81,29 @@ func CreateStudent(ctx context.Context, req *codec.Mahasiswa) (int, error) {
 	}
 	return id, nil
 }
+
+func CreateMajor(ctx context.Context, req *codec.Major) (int, error) {
+	id, err := repository.CreateMajor(ctx, model.Major{
+		Id:          req.Id,
+		NamaJurusan: req.NamaJurusan,
+	})
+	if err != nil {
+		fmt.Println(ctx, err)
+		// log.Error(ctx, err)
+		return id, err
+	}
+	return id, nil
+}
+
+func CreateHobby(ctx context.Context, req *codec.Hobby) (int, error) {
+	id, err := repository.CreateHobby(ctx, model.Hobby{
+		Id:       req.Id,
+		NamaHobi: req.NamaHobi,
+	})
+	if err != nil {
+		fmt.Println(ctx, err)
+		// log.Error(ctx, err)
+		return id, err
+	}
+	return id, nil
+}

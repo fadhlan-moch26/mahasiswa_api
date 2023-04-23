@@ -18,6 +18,8 @@ func (c *StudentController) URLMapping() {
 	c.Mapping("CreateStudent", c.CreateStudent)
 	c.Mapping("UpdateStudent", c.UpdateStudent)
 	c.Mapping("DeleteStudent", c.DeleteStudent)
+	c.Mapping("CreateHobby", c.CreateHobby)
+	c.Mapping("CreateMajor", c.CreateMajor)
 }
 
 func (c *StudentController) GetStudents() {
@@ -101,4 +103,46 @@ func (c *StudentController) DeleteStudent() {
 	}
 	// 	server.SetResponse(w, response.Success)
 	c.Ctx.JSONResp(id)
+}
+
+func (c *StudentController) CreateMajor() {
+	ctx := c.Ctx.Request.Context()
+	w := c.Ctx.ResponseWriter
+	req := &codec.Major{}
+	err := c.BindJSON(req)
+	if err != nil {
+		fmt.Print(w)
+		fmt.Println(err)
+		return
+	}
+	id, err := studentServices.CreateMajor(ctx, req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	err = c.JSONResp(&codec.Major{Id: id})
+	if err != nil {
+		fmt.Println(err)
+	}
+}
+
+func (c *StudentController) CreateHobby() {
+	ctx := c.Ctx.Request.Context()
+	w := c.Ctx.ResponseWriter
+	req := &codec.Hobby{}
+	err := c.BindJSON(req)
+	if err != nil {
+		fmt.Print(w)
+		fmt.Println(err)
+		return
+	}
+	id, err := studentServices.CreateHobby(ctx, req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	err = c.JSONResp(&codec.Hobby{Id: id})
+	if err != nil {
+		fmt.Println(err)
+	}
 }

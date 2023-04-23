@@ -89,3 +89,39 @@ func CreateStudent(ctx context.Context, req model.Mahasiswa) (int, error) {
 	// log.Infoln(ctx, "Succesfully save data")
 	return req.Id, nil
 }
+
+func CreateMajor(ctx context.Context, req model.Major) (int, error) {
+	o := orm.NewOrm()
+	_, err := o.Insert(&req)
+	if err != nil {
+		if err.Error() == "no LastInsertId available" {
+			fmt.Println(ctx, err)
+			return 0, err
+			// log.Infoln(ctx, err)
+		} else {
+			fmt.Println(ctx, err)
+			return 0, err
+			// log.Error(ctx, err)
+		}
+	}
+	// log.Infoln(ctx, "Succesfully save data")
+	return req.Id, nil
+}
+
+func CreateHobby(ctx context.Context, req model.Hobby) (int, error) {
+	o := orm.NewOrm()
+	_, err := o.Insert(&req)
+	if err != nil {
+		if err.Error() == "no LastInsertId available" {
+			fmt.Println(ctx, err)
+			return 0, err
+			// log.Infoln(ctx, err)
+		} else {
+			fmt.Println(ctx, err)
+			return 0, err
+			// log.Error(ctx, err)
+		}
+	}
+	// log.Infoln(ctx, "Succesfully save data")
+	return req.Id, nil
+}

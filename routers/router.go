@@ -19,4 +19,6 @@ func init() {
 	beego.Router("/v1/student", &controllers.StudentController{}, "post:CreateStudent")
 	beego.Router("/v1/student/:id", &controllers.StudentController{}, "put:UpdateStudent")
 	beego.Router("/v1/student/:id", &controllers.StudentController{}, "delete:DeleteStudent")
+	beego.Router("/v1/major", &controllers.StudentController{}, "post:CreateMajor")
+	beego.Router("/v1/hobby", &controllers.StudentController{}, "post:CreateHobby")
 }
