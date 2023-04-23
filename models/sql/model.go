@@ -17,7 +17,7 @@ func init() {
 }
 
 type Student struct {
-	Id                string `orm:"pk"`
+	Id                int `orm:"pk"`
 	Nama              string
 	Usia              int
 	Gender            int
@@ -25,12 +25,12 @@ type Student struct {
 }
 
 type Major struct {
-	Id          string `orm:"pk"`
+	Id          int `orm:"pk"`
 	NamaJurusan string
 }
 
 type Hobby struct {
-	Id       string `orm:"pk"`
+	Id       int `orm:"pk"`
 	NamaHobi string
 }
 

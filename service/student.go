@@ -45,3 +45,12 @@ func GetStudent(ctx context.Context, id string) (*codec.Student, error) {
 		TanggalRegistrasi: student.TanggalRegistrasi,
 	}, nil
 }
+
+func DeleteStudent(ctx context.Context, req *codec.Student) (int, error) {
+	id, err := repository.DeleteStudent(ctx, *req)
+	if err != nil {
+		return 0, err
+	}
+	req.Id = id
+	return req.Id, nil
+}
