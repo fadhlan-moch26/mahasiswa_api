@@ -2,7 +2,7 @@ package codec
 
 import "time"
 
-type Student struct {
+type Mahasiswa struct {
 	Id                int       `json:"id"`
 	Nama              string    `json:"nama"`
 	Usia              int       `json:"usia"`

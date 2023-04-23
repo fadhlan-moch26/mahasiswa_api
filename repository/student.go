@@ -11,11 +11,11 @@ import (
 	"github.com/beego/beego/v2/adapter/orm"
 )
 
-func GetStudents(ctx context.Context) ([]model.Student, error) {
-	// students := make([]*model.Student, 0)
+func GetStudents(ctx context.Context) ([]model.Mahasiswa, error) {
+	// students := make([]*model.Mahasiswa, 0)
 	// res, err := o.Raw("SELECT * FROM student.mahasiswa").Exec()
 
-	students := []model.Student{}
+	students := []model.Mahasiswa{}
 	o := orm.NewOrm()
 	qs := o.QueryTable("mahasiswa")
 	_, err := qs.All(&students)
@@ -28,9 +28,9 @@ func GetStudents(ctx context.Context) ([]model.Student, error) {
 	return students, nil
 }
 
-func GetStudent(ctx context.Context, id string) (*model.Student, error) {
+func GetStudent(ctx context.Context, id string) (*model.Mahasiswa, error) {
 	id_int, _ := strconv.Atoi(id)
-	student := model.Student{Id: id_int}
+	student := model.Mahasiswa{Id: id_int}
 	o := orm.NewOrm()
 	err := o.Read(&student)
 	if errors.Is(orm.ErrNoRows, err) {
@@ -41,7 +41,7 @@ func GetStudent(ctx context.Context, id string) (*model.Student, error) {
 	return &student, nil
 }
 
-func DeleteStudent(ctx context.Context, req codec.Student) (int, error) {
+func DeleteStudent(ctx context.Context, req codec.Mahasiswa) (int, error) {
 	o := orm.NewOrm()
 	err := o.Read(&req)
 	if err != nil {
@@ -56,7 +56,7 @@ func DeleteStudent(ctx context.Context, req codec.Student) (int, error) {
 	return int(id), nil
 }
 
-func UpdateStudent(ctx context.Context, req codec.Student) (int, error) {
+func UpdateStudent(ctx context.Context, req codec.Mahasiswa) (int, error) {
 	o := orm.NewOrm()
 	err := o.Read(&req)
 	if err != nil {
@@ -72,7 +72,7 @@ func UpdateStudent(ctx context.Context, req codec.Student) (int, error) {
 	return int(id), nil
 }
 
-func CreateStudent(ctx context.Context, req model.Student) (int, error) {
+func CreateStudent(ctx context.Context, req model.Mahasiswa) (int, error) {
 	o := orm.NewOrm()
 	_, err := o.Insert(&req)
 	if err != nil {

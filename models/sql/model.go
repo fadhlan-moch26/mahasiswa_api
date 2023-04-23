@@ -6,17 +6,17 @@ import (
 	"github.com/beego/beego/v2/client/orm"
 )
 
-const tableNameStudent = "student"
+const tableNameMahasiswa = "Mahasiswa"
 const tableNameHobby = "Hobby"
 const tableNameMajor = "Major"
 
 func init() {
-	orm.RegisterModel(new(Student))
+	orm.RegisterModel(new(Mahasiswa))
 	orm.RegisterModel(new(Hobby))
 	orm.RegisterModel(new(Major))
 }
 
-type Student struct {
+type Mahasiswa struct {
 	Id                int `orm:"pk"`
 	Nama              string
 	Usia              int
@@ -34,8 +34,8 @@ type Hobby struct {
 	NamaHobi string
 }
 
-func (m *Student) TableName() string {
-	return tableNameStudent
+func (m *Mahasiswa) TableName() string {
+	return tableNameMahasiswa
 }
 
 func (m *Hobby) TableName() string {

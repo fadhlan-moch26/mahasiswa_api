@@ -9,7 +9,7 @@ import (
 	"mahasiswa/repository"
 )
 
-func GetStudents(ctx context.Context) ([]*codec.Student, error) {
+func GetStudents(ctx context.Context) ([]*codec.Mahasiswa, error) {
 	students, err := repository.GetStudents(ctx)
 	if err != nil {
 		// log.Error(ctx, err)
@@ -18,9 +18,9 @@ func GetStudents(ctx context.Context) ([]*codec.Student, error) {
 	// if len(students) < 0 {
 	// 	return nil, log.Errorln("Data not found")
 	// }
-	v := make([]*codec.Student, 0)
+	v := make([]*codec.Mahasiswa, 0)
 	for _, student := range students {
-		v = append(v, &codec.Student{
+		v = append(v, &codec.Mahasiswa{
 			Id:                student.Id,
 			Nama:              student.Nama,
 			Usia:              student.Usia,
@@ -31,7 +31,7 @@ func GetStudents(ctx context.Context) ([]*codec.Student, error) {
 	return v, nil
 }
 
-func GetStudent(ctx context.Context, id string) (*codec.Student, error) {
+func GetStudent(ctx context.Context, id string) (*codec.Mahasiswa, error) {
 	if id == "" {
 		return nil, errors.New("id is empty")
 	}
@@ -39,7 +39,7 @@ func GetStudent(ctx context.Context, id string) (*codec.Student, error) {
 	if err != nil {
 		return nil, errors.New("repository error")
 	}
-	return &codec.Student{
+	return &codec.Mahasiswa{
 		Id:                student.Id,
 		Nama:              student.Nama,
 		Usia:              student.Usia,
@@ -48,7 +48,7 @@ func GetStudent(ctx context.Context, id string) (*codec.Student, error) {
 	}, nil
 }
 
-func DeleteStudent(ctx context.Context, req *codec.Student) (int, error) {
+func DeleteStudent(ctx context.Context, req *codec.Mahasiswa) (int, error) {
 	id, err := repository.DeleteStudent(ctx, *req)
 	if err != nil {
 		return 0, err
@@ -57,7 +57,7 @@ func DeleteStudent(ctx context.Context, req *codec.Student) (int, error) {
 	return req.Id, nil
 }
 
-func UpdateStudent(ctx context.Context, req *codec.Student) (int, error) {
+func UpdateStudent(ctx context.Context, req *codec.Mahasiswa) (int, error) {
 	id, err := repository.UpdateStudent(ctx, *req)
 	if err != nil {
 		return 0, err
@@ -66,8 +66,8 @@ func UpdateStudent(ctx context.Context, req *codec.Student) (int, error) {
 	return req.Id, nil
 }
 
-func CreateStudent(ctx context.Context, req *codec.Student) (int, error) {
-	id, err := repository.CreateStudent(ctx, model.Student{
+func CreateStudent(ctx context.Context, req *codec.Mahasiswa) (int, error) {
+	id, err := repository.CreateStudent(ctx, model.Mahasiswa{
 		Id:                req.Id,
 		Nama:              req.Nama,
 		Usia:              req.Usia,

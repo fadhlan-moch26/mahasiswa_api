@@ -50,7 +50,7 @@ func (c *StudentController) GetStudent() {
 func (c *StudentController) CreateStudent() {
 	ctx := c.Ctx.Request.Context()
 	w := c.Ctx.ResponseWriter
-	req := &codec.Student{}
+	req := &codec.Mahasiswa{}
 	err := c.BindJSON(req)
 	if err != nil {
 		fmt.Print(w)
@@ -71,7 +71,7 @@ func (c *StudentController) CreateStudent() {
 func (c *StudentController) UpdateStudent() {
 	ctx := c.Ctx.Request.Context()
 	w := c.Ctx.ResponseWriter
-	req := codec.Student{}
+	req := codec.Mahasiswa{}
 	err := c.BindJSON(&req)
 	if err != nil {
 		fmt.Print(w)
@@ -88,7 +88,7 @@ func (c *StudentController) UpdateStudent() {
 func (c *StudentController) DeleteStudent() {
 	ctx := c.Ctx.Request.Context()
 	w := c.Ctx.ResponseWriter
-	req := codec.Student{}
+	req := codec.Mahasiswa{}
 	err := c.BindJSON(&req)
 	if err != nil {
 		fmt.Print(w)
