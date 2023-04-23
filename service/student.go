@@ -3,7 +3,9 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 	codec "mahasiswa/models/codec"
+	model "mahasiswa/models/sql"
 	"mahasiswa/repository"
 )
 
@@ -62,4 +64,20 @@ func UpdateStudent(ctx context.Context, req *codec.Student) (int, error) {
 	}
 	req.Id = id
 	return req.Id, nil
+}
+
+func CreateStudent(ctx context.Context, req *codec.Student) (int, error) {
+	id, err := repository.CreateStudent(ctx, model.Student{
+		Id:                req.Id,
+		Nama:              req.Nama,
+		Usia:              req.Usia,
+		Gender:            req.Gender,
+		TanggalRegistrasi: req.TanggalRegistrasi,
+	})
+	if err != nil {
+		fmt.Println(ctx, err)
+		// log.Error(ctx, err)
+		return id, err
+	}
+	return id, nil
 }

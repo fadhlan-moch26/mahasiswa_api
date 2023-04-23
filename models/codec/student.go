@@ -9,3 +9,7 @@ type Student struct {
 	Gender            int       `json:"gender"`
 	TanggalRegistrasi time.Time `json:"tanggalRegistrasi"`
 }
+
+type CreateStudentRespone struct {
+	Id int `json:"id"`
+}

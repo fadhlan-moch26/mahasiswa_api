@@ -71,3 +71,21 @@ func UpdateStudent(ctx context.Context, req codec.Student) (int, error) {
 	fmt.Println(id, " Succesfully delete data")
 	return int(id), nil
 }
+
+func CreateStudent(ctx context.Context, req model.Student) (int, error) {
+	o := orm.NewOrm()
+	_, err := o.Insert(&req)
+	if err != nil {
+		if err.Error() == "no LastInsertId available" {
+			fmt.Println(ctx, err)
+			return 0, err
+			// log.Infoln(ctx, err)
+		} else {
+			fmt.Println(ctx, err)
+			return 0, err
+			// log.Error(ctx, err)
+		}
+	}
+	// log.Infoln(ctx, "Succesfully save data")
+	return req.Id, nil
+}

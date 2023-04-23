@@ -47,7 +47,26 @@ func (c *StudentController) GetStudent() {
 		return
 	}
 }
-func (c *StudentController) CreateStudent() {}
+func (c *StudentController) CreateStudent() {
+	ctx := c.Ctx.Request.Context()
+	w := c.Ctx.ResponseWriter
+	req := &codec.Student{}
+	err := c.BindJSON(req)
+	if err != nil {
+		fmt.Print(w)
+		fmt.Println(err)
+		return
+	}
+	id, err := studentServices.CreateStudent(ctx, req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	err = c.JSONResp(&codec.CreateStudentRespone{Id: id})
+	if err != nil {
+		fmt.Println(err)
+	}
+}
 
 func (c *StudentController) UpdateStudent() {
 	ctx := c.Ctx.Request.Context()
