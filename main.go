@@ -11,8 +11,8 @@ import (
 
 func main() {
 	// orm.RegisterDriver("mysql", orm.DRMySQL)
-	orm.RegisterDataBase("default", "mysql", "root:admin@tcp(localhost:3306)/student")
-	db, err := orm.GetDB("student")
+	orm.RegisterDataBase("default", "mysql", "os.Getenv("DB_USER"):os.Getenv("DB_PASS")@tcp(os.Getenv("DB_HOST"))/os.Getenv("DB_NAME")")
+	db, err := orm.GetDB("os.Getenv("DB_NAME")")
 	if err != nil {
 		fmt.Println("Error : ", err)
 	} else {
